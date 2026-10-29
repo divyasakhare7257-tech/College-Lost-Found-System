@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>College Lost & Found System</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f7f9fc;
+            color: #202124;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            background: linear-gradient(135deg, #2563eb, #0d47c9);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header .logo {
+            font-size: 45px;
+        }
+
+        header h1 {
+            font-size: 36px;
+            margin: 5px 0;
+        }
+
+        header p {
+            font-size: 20px;
+        }
+
+
+        /* ================= NAVIGATION ================= */
+
+        nav {
+            background: #10234d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            padding: 15px;
+            white-space: nowrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #ffd43b;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .container {
+            width: 94%;
+            max-width: 1450px;
+            margin: auto;
+        }
+
+
+        /* ================= DASHBOARD ================= */
+
+        .dashboard-section {
+            text-align: center;
+            padding: 25px 0 20px;
+        }
+
+        .dashboard-section h2 {
+            color: #1451b9;
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .dashboard-section > p {
+            font-size: 19px;
+            color: #555;
+        }
+
+        .dashboard {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            gap: 25px;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .dashboard-card {
+            flex: 1;
+            min-width: 0;
+            background: white;
+            padding: 22px 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #e1e5eb;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .dashboard-card .icon {
+            width: 62px;
+            height: 62px;
+            margin: auto;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            color: white;
+        }
+
+        .dashboard-card h3 {
+            margin: 12px 0 8px;
+            font-size: 21px;
+        }
+
+        .dashboard-card p {
+            height: 48px;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+
+        .dashboard-card a {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+
+        /* Dashboard Colors */
+
+        .lost {
+            background: #ffecec;
+            border-color: #ffcaca;
+        }
+
+        .lost .icon {
+            background: #e92929;
+        }
+
+        .lost h3 {
+            color: #e92929;
+        }
+
+        .lost a {
+            background: #e92929;
+        }
+
+
+        .found {
+            background: #f0f9ed;
+            border-color: #cce6c5;
+        }
+
+        .found .icon {
+            background: #2ca02c;
+        }
+
+        .found h3 {
+            color: #2ca02c;
+        }
+
+        .found a {
+            background: #2ca02c;
+        }
+
+
+        .buy {
+            background: #f1f6ff;
+            border-color: #c9dafa;
+        }
+
+        .buy .icon {
+            background: #1769e0;
+        }
+
+        .buy h3 {
+            color: #1769e0;
+        }
+
+        .buy a {
+            background: #1769e0;
+        }
+
+
+        .sell {
+            background: #fff8e8;
+            border-color: #f5dc9f;
+        }
+
+        .sell .icon {
+            background: #ff9100;
+        }
+
+        .sell h3 {
+            color: #ff8500;
+        }
+
+        .sell a {
+            background: #ff9100;
+        }
+
+
+        .search {
+            background: #f7f1ff;
+            border-color: #ddd0f3;
+        }
+
+        .search .icon {
+            background: #7040c5;
+        }
+
+        .search h3 {
+            color: #6336b7;
+        }
+
+        .search a {
+            background: #7040c5;
+        }
+
+
+        /* ================= LINE ================= */
+
+        .line {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 0 0 20px;
+        }
+
+
+        /* ================= FORMS AREA ================= */
+
+        .forms-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1.1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+
+        .form-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid #e2e5e9;
+        }
+
+
+        .form-box h2 {
+            text-align: center;
+            margin-bottom: 18px;
+            font-size: 22px;
+        }
+
+
+        .lost-form {
+            background: #fffafa;
+            border-color: #ffd0d0;
+        }
+
+        .lost-form h2 {
+            color: #e92929;
+        }
+
+
+        .found-form {
+            background: #fbfff9;
+            border-color: #d4ebce;
+        }
+
+        .found-form h2 {
+            color: #2ca02c;
+        }
+
+
+        .sell-form {
+            background: #fffdf7;
+            border-color: #f4dfad;
+        }
+
+        .sell-form h2 {
+            color: #ef8500;
+        }
+
+
+        /* ================= FORM ELEMENTS ================= */
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccd2d9;
+            border-radius: 5px;
+            font-size: 14px;
+            background: white;
+        }
+
+
+        textarea {
+            height: 75px;
+            resize: vertical;
+        }
+
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+
+        /* ================= FORM BUTTONS ================= */
+
+        .form-button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 16px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+
+        .lost-button {
+            background: #e92929;
+        }
+
+        .found-button {
+            background: #2ca02c;
+        }
+
+        .sell-button {
+            background: #ff9100;
+        }
+
+
+        .form-button:hover {
+            opacity: 0.85;
+        }
+
+
+        /* ================= SELLING ITEMS ================= */
+
+        .items-section {
+            margin-top: 25px;
+            margin-bottom: 30px;
+        }
+
+        .items-section h2 {
+            color: #1451b9;
+            margin-bottom: 15px;
+        }
+
+        .items {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 5px 5px 15px;
+        }
+
+        .item-card {
+            min-width: 240px;
+            background: white;
+            padding: 18px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #ddd;
+            flex-shrink: 0;
+        }
+
+        .item-card h3 {
+            color: #2563eb;
+            margin-bottom: 8px;
+        }
+
+        .item-card p {
+            line-height: 1.5;
+        }
+
+        .price {
+            color: green;
+            font-size: 19px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .status {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background: #dcfce7;
+            color: #166534;
+            font-size: 13px;
+        }
+
+        .contact-button {
+            width: 100%;
+            margin-top: 12px;
+            padding: 9px;
+            border: none;
+            background: #2563eb;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #10234d;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            margin-top: 20px;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 900px) {
+
+            .forms-container {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-card {
+                min-width: 220px;
+            }
+
+            .dashboard {
+                overflow-x: auto;
+                padding-bottom: 15px;
+            }
+
+            nav {
+                overflow-x: auto;
+                justify-content: flex-start;
+            }
+
+            header h1 {
+                font-size: 27px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+
+        <div class="logo">🎓</div>
+
+        <h1>College Lost & Found System</h1>
+
+        <p>Find • Return • Buy • Sell</p>
+
+    </header>
+
+
+    <!-- ================= NAVIGATION ================= -->
+
+    <nav>
+
+        <a href="#home">🏠 Home</a>
+
+        <a href="#lost">🔴 Report Lost</a>
+
+        <a href="#found">🟢 Report Found</a>
+
+        <a href="#items">🛒 Buy Items</a>
+
+        <a href="#selling">🏷️ Sell Item</a>
+
+        <a href="#search">🔍 Search Items</a>
+
+    </nav>
+
+
+    <div class="container">
+
+
+        <!-- ================= DASHBOARD ================= -->
+
+        <section class="dashboard-section" id="home">
+
+            <h2>🎓 Student Dashboard</h2>
+
+            <p>Welcome to College Lost & Found System</p>
+
+
+            <div class="dashboard">
+
+
+                <!-- LOST -->
+
+                <div class="dashboard-card lost">
+
+                    <div class="icon">👜</div>
+
+                    <h3>Lost Item</h3>
+
+                    <p>
+                        Report an item<br>
+                        that you have lost.
+                    </p>
+
+                    <a href="#lost">
+                        Report Lost
+                    </a>
+
+                </div>
+
+
+                <!-- FOUND -->
+
+                <div class="dashboard-card found">
+
+                    <div class="icon">🏷️</div>
+
+                    <h3>Found Item</h3>
+
+                    <p>
+                        Report an item<br>
+                        that you have found.
+                    </p>
+
+                    <a href="#found">
+                        Report Found
+                    </a>
+
+                </div>
+
+
+                <!-- BUY -->
+
+                <div class="dashboard-card buy">
+
+                    <div class="icon">🛒</div>
+
+                    <h3>Buy Items</h3>
+
+                    <p>
+                        Find useful college<br>
+                        items for sale.
+                    </p>
+
+                    <a href="#items">
+                        Buy Items
+                    </a>
+
+                </div>
+
+
+                <!-- SELL -->
+
+                <div class="dashboard-card sell">
+
+                    <div class="icon">🏷️</div>
+
+                    <h3>Sell Items</h3>
+
+                    <p>
+                        Sell your unused<br>
+                        college items.
+                    </p>
+
+                    <a href="#selling">
+                        Sell Item
+                    </a>
+
+                </div>
+
+
+                <!-- SEARCH -->
+
+                <div class="dashboard-card search">
+
+                    <div class="icon">🔍</div>
+
+                    <h3>Search Items</h3>
+
+                    <p>
+                        Search available<br>
+                        college items.
+                    </p>
+
+                    <a href="#search">
+                        Search Items
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <hr class="line">
+
+
+        <!-- ================= THREE FORMS ================= -->
+
+        <div class="forms-container">
+
+
+            <!-- REPORT LOST -->
+
+            <section class="form-box lost-form" id="lost">
+
+                <h2>🔴 Report Lost Item</h2>
+
+                <form onsubmit="reportLost(event)">
+
+                    <label>Item Name</label>
+
+                    <input
+                        type="text"
+                        id="lostName"
+                        placeholder="Enter lost item name"
+                        required
+                    >
+
+
+                    <label>Description</label>
+
+                    <textarea
+                        id="lostDescription"
+                        placeholder="Enter item details"
+                        required
+                    ></textarea>
+
+
+                    <label>Lost Location</label>
+
+                    <input
+                        type="text"
+                        id="lostLocation"
+                        placeholder="Example: College Library"
+                        required
+                    >
+
+
+                    <label>Date</label>
+
+                    <input
+                        type="date"
+                        required
+                    >
+
+
+                    <button
+                        class="form-button lost-button"
+                        type="submit"
+                    >
+                        Report Lost Item
+                    </button>
+
+                </form>
+
+            </section>
+
+
+            <!-- REPORT FOUND -->
+
+            <section class="form-box found-form" id="found">
+
+                <h2>🟢 Report Found Item</h2>
+
+                <form onsubmit="reportFound(event)">
+
+                    <label>Item Name</label>
+
+                    <input
+                        type="text"
+                        id="foundName"
+                        placeholder="Enter found item name"
+                        required
+                    >
+
+
+                    <label>Description</label>
+
+                    <textarea
+                        id="foundDescription"
+                        placeholder="Enter item details"
+                        required
+                    ></textarea>
+
+
+                    <label>Found Location</label>
+
+                    <input
+                        type="text"
+                        id="foundLocation"
+                        placeholder="Example: College Canteen"
+                        required
+                    >
+
+
+                    <label>Date</label>
+
+                    <input
+                        type="date"
+                        required
+                    >
+
+
+                    <button
+                        class="form-button found-button"
+                        type="submit"
+                    >
+                        Report Found Item
+                    </button>
+
+                </form>
+
+            </section>
+
+
+            <!-- SELL ITEM -->
+
+            <section class="form-box sell-form" id="selling">
+
+                <h2>🛒 Sell College Item</h2>
+
+                <form onsubmit="sellItem(event)">
+
+
+                    <label>Item Name</label>
+
+                    <select id="sellName" required>
+
+                        <option value="">
+                            Select Item
+                        </option>
+
+                        <option>Engineering Books</option>
+                        <option>Diploma Books</option>
+                        <option>Scientific Calculator</option>
+                        <option>Laptop</option>
+                        <option>Monitor</option>
+                        <option>Keyboard</option>
+                        <option>Mouse</option>
+                        <option>Charger</option>
+                        <option>Pen Drive</option>
+                        <option>Headphones</option>
+                        <option>Stationery</option>
+                        <option>Drawing Instruments</option>
+                        <option>Engineering Drawing Set</option>
+                        <option>Lab Equipment</option>
+                        <option>Lab Coat</option>
+                        <option>Notes</option>
+                        <option>Previous Year Question Papers</option>
+                        <option>Power Bank</option>
+
+                    </select>
+
+
+                    <label>Item Description</label>
+
+                    <textarea
+                        placeholder="Enter item condition and details"
+                        required
+                    ></textarea>
+
+
+                    <label>Price (₹)</label>
+
+                    <input
+                        type="number"
+                        id="sellPrice"
+                        placeholder="Enter price"
+                        required
+                    >
+
+
+                    <label>Contact Number</label>
+
+                    <input
+                        type="tel"
+                        placeholder="Enter contact number"
+                        required
+                    >
+
+
+                    <label>Upload Item Photo</label>
+
+                    <input
+                        type="file"
+                        accept="image/*"
+                    >
+
+
+                    <button
+                        class="form-button sell-button"
+                        type="submit"
+                    >
+                        Post Selling Item
+                    </button>
+
+                </form>
+
+            </section>
+
+
+        </div>
+
+
+        <!-- ================= SEARCH ================= -->
+
+        <section class="search-box form-box" id="search">
+
+            <h2>🔍 Search College Items</h2>
+
+            <input
+                type="text"
+                id="searchBox"
+                placeholder="Search books, calculator, laptop..."
+                onkeyup="searchItems()"
+            >
+
+        </section>
+
+
+        <!-- ================= AVAILABLE ITEMS ================= -->
+
+        <section class="items-section" id="items">
+
+            <h2>📚 Available College Selling Items</h2>
+
+
+            <div class="items" id="itemList">
+
+
+                <!-- Engineering Books -->
+
+                <div class="item-card">
+
+                    <h3>Engineering Books</h3>
+
+                    <p>
+                        Engineering books in good condition.
+                    </p>
+
+                    <p class="price">₹250</p>
+
+                    <span class="status">
+                        Available
+                    </span>
+
+                    <button
+                        class="contact-button"
+                        onclick="contactSeller()"
+                    >
+                        Contact Seller
+                    </button>
+
+                </div>
+
+
+                <!-- Calculator -->
+
+                <div class="item-card">
+
+                    <h3>Scientific Calculator</h3>
+
+                    <p>
+                        Scientific calculator in good condition.
+                    </p>
+
+                    <p class="price">₹500</p>
+
+                    <span class="status">
+                        Available
+                    </span>
+
+                    <button
+                        class="contact-button"
+                        onclick="contactSeller()"
+                    >
+                        Contact Seller
+                    </button>
+
+                </div>
+
+
+                <!-- Laptop -->
+
+                <div class="item-card">
+
+                    <h3>Laptop</h3>
+
+                    <p>
+                        Used laptop in working condition.
+                    </p>
+
+                    <p class="price">₹25,000</p>
+
+                    <span class="status">
+                        Available
+                    </span>
+
+                    <button
+                        class="contact-button"
+                        onclick="contactSeller()"
+                    >
+                        Contact Seller
+                    </button>
+
+                </div>
+
+
+                <!-- Drawing Set -->
+
+                <div class="item-card">
+
+                    <h3>Drawing Instruments</h3>
+
+                    <p>
+                        Engineering drawing instruments.
+                    </p>
+
+                    <p class="price">₹300</p>
+
+                    <span class="status">
+                        Available
+                    </
+                    
